@@ -58,3 +58,6 @@ DELETE /addresses/1
 
 ### 媒体类型
 HTTP头``Accpet``和``Content-Type`` 能够用来描述 HTTP 请求中发送或者请求的内容。如果请求响应的是JSON格式，客户端可能会设置``Accept``为``application/json``。相反的。当发送数据时，设置``Content-Type``为``application/xml``来告诉客户端要发送的请求时XML。
+
+原文连接： https://spring.io/understanding/REST
+转载请注明来源
