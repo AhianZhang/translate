@@ -1,0 +1,15 @@
+许多使用基于 JVM 的语言工作的经验丰富的工程师都看到过下面这样的错误：
+```
+[error] (run-main-0) java.lang.OutOfMemoryError: unable to create native thread: 
+[error] java.lang.OutOfMemoryError: unable to create native thread: 
+[error] 	at java.base/java.lang.Thread.start0(Native Method)
+[error] 	at java.base/java.lang.Thread.start(Thread.java:813)
+...
+[error] 	at java.base/java.lang.Thread.run(Thread.java:844)
+```
+`OutOfMemory`...err...线程溢出。在我的电脑上正在运行的 Linux，这种情况发生在微不足道的 11500 个线程之后。
+
+如果你通过启动无限期睡眠的Goroutines在Go中尝试相同的事情，你会得到一个很不一样的结果。在我感到无聊之前，我得到了7000万个goroutines。
+那么，为什么你可以有比线程更多的Goroutine呢？答案是在操作系统下进行的有趣旅程，然后再次备份。这不仅仅是一个学术问题 - 它对设计软件的方式具有实际意义。我几十次遇到生产中的JVM线程限制，要么是因为一些错误的代码泄露了线程，要么是因为工程师根本不知道JVM的线程限制。
+
+## 什么是线程呢？
